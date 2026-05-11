@@ -35,7 +35,7 @@ async def follow_up_loop():
         await asyncio.sleep(300)  # Check every 5 minutes
 
 
-@asynccontext_manager
+@asynccontextmanager
 async def lifespan(app: FastAPI):
     """Startup and shutdown events."""
     # Startup
