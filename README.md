@@ -3,6 +3,7 @@
 > **Automasi 90% chat bisnis Anda di 15+ platform dalam satu dashboard.**
 
 AutoMind adalah AI-powered communication hub yang mengubah cara bisnis kecil-menengah menghandle pesan masuk di WhatsApp, Instagram, Telegram, Shopee, dan 11+ platform lainnya. Bukan sekedar auto-reply biasa — AutoMind **membaca konteks, mendeteksi intent, dan mengambil keputusan otomatis** seperti sales assistant profesional yang bekerja 24/7.
+<img width="1672" height="941" alt="coding 2" src="https://github.com/user-attachments/assets/05bcd5c7-0abc-46bd-84d0-8c880e960178" />
 
 ---
 
