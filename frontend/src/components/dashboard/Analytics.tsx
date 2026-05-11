@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../../utils/api";
+import { BarChartComponent, PieChartComponent } from "../shared/Chart";
 
 export default function Analytics() {
   const [overview, setOverview] = useState<any>(null);
@@ -49,6 +50,31 @@ export default function Analytics() {
     { label: "Conversion Rate", value: `${overview?.conversion_rate || 0}%`, icon: "📈" },
   ];
 
+  // Prepare chart data
+  const platformChartData = platformStats?.platforms
+    ? Object.entries(platformStats.platforms).map(([name, data]: [string, any]) => ({
+        name: name.charAt(0).toUpperCase() + name.slice(1),
+        value: data.total,
+      }))
+    : [];
+
+  const intentChartData = intentBreakdown?.intents
+    ? Object.entries(intentBreakdown.intents)
+        .sort(([, a]: [string, any], [, b]: [string, any]) => b.count - a.count)
+        .map(([name, data]: [string, any]) => ({
+          name: name.replace(/_/g, " "),
+          value: data.count,
+        }))
+    : [];
+
+  const platformBarData = platformStats?.platforms
+    ? Object.entries(platformStats.platforms).map(([name, data]: [string, any]) => ({
+        name: name.charAt(0).toUpperCase() + name.slice(1),
+        Incoming: data.incoming,
+        "AI Replied": data.ai_replied,
+      }))
+    : [];
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
@@ -71,54 +97,73 @@ export default function Analytics() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Platform Stats */}
+      {/* Charts */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        {/* Platform Distribution Pie */}
         <div className="card">
-          <h3 className="text-lg font-semibold mb-4">🌐 Platform Breakdown</h3>
-          {platformStats?.platforms && Object.keys(platformStats.platforms).length > 0 ? (
-            <div className="space-y-3">
-              {Object.entries(platformStats.platforms).map(([platform, data]: [string, any]) => (
-                <div key={platform} className="p-3 bg-gray-800 rounded-xl">
-                  <div className="flex justify-between mb-1">
-                    <span className="text-sm font-medium capitalize">{platform}</span>
-                    <span className="text-sm text-gray-400">{data.total} messages</span>
-                  </div>
-                  <div className="flex gap-4 text-xs text-gray-500">
-                    <span>📥 {data.incoming} incoming</span>
-                    <span>🤖 {data.ai_replied} AI replied</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+          {platformChartData.length > 0 ? (
+            <PieChartComponent data={platformChartData} title="🌐 Platform Distribution" />
           ) : (
-            <div className="text-center text-gray-500 py-8">No platform data yet</div>
+            <div className="text-center text-gray-500 py-12">
+              <div className="text-4xl mb-2">🌐</div>
+              <p>No platform data yet</p>
+              <p className="text-sm mt-1">Connect a platform to see stats</p>
+            </div>
           )}
         </div>
 
-        {/* Intent Breakdown */}
+        {/* Intent Distribution Pie */}
         <div className="card">
-          <h3 className="text-lg font-semibold mb-4">🎯 Intent Breakdown</h3>
-          {intentBreakdown?.intents && Object.keys(intentBreakdown.intents).length > 0 ? (
-            <div className="space-y-3">
-              {Object.entries(intentBreakdown.intents)
-                .sort(([, a]: [string, any], [, b]: [string, any]) => b.count - a.count)
-                .map(([intent, data]: [string, any]) => (
-                  <div key={intent}>
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="text-gray-400">{intent.replace(/_/g, " ")}</span>
-                      <span className="text-gray-300">{data.count} ({data.percentage}%)</span>
-                    </div>
-                    <div className="w-full bg-gray-800 rounded-full h-2">
-                      <div className="bg-brand-500 h-2 rounded-full transition-all" style={{ width: `${data.percentage}%` }}></div>
-                    </div>
-                  </div>
-                ))}
-            </div>
+          {intentChartData.length > 0 ? (
+            <PieChartComponent data={intentChartData} title="🎯 Intent Breakdown" />
           ) : (
-            <div className="text-center text-gray-500 py-8">No intent data yet</div>
+            <div className="text-center text-gray-500 py-12">
+              <div className="text-4xl mb-2">🎯</div>
+              <p>No intent data yet</p>
+              <p className="text-sm mt-1">Receive messages to see intents</p>
+            </div>
           )}
         </div>
       </div>
+
+      {/* Platform Bar Chart */}
+      <div className="card mb-6">
+        {platformBarData.length > 0 ? (
+          <BarChartComponent data={platformBarData} title="📊 Messages by Platform" />
+        ) : (
+          <div className="text-center text-gray-500 py-12">
+            <div className="text-4xl mb-2">📊</div>
+            <p>No message data yet</p>
+          </div>
+        )}
+      </div>
+
+      {/* Platform Details */}
+      {platformStats?.platforms && Object.keys(platformStats.platforms).length > 0 && (
+        <div className="card">
+          <h3 className="text-lg font-semibold mb-4">📋 Platform Details</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Object.entries(platformStats.platforms).map(([platform, data]: [string, any]) => (
+              <div key={platform} className="p-4 bg-gray-800 rounded-xl">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xl">
+                    {platform === "whatsapp" ? "💬" : platform === "instagram" ? "📸" : platform === "telegram" ? "✈️" : platform === "shopee" ? "🛒" : "🌐"}
+                  </span>
+                  <span className="font-semibold capitalize">{platform}</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  <div className="text-gray-400">Total: <span className="text-white font-medium">{data.total}</span></div>
+                  <div className="text-gray-400">Incoming: <span className="text-white font-medium">{data.incoming}</span></div>
+                  <div className="text-gray-400">AI Replied: <span className="text-green-400 font-medium">{data.ai_replied}</span></div>
+                  <div className="text-gray-400">AI Rate: <span className="text-brand-400 font-medium">
+                    {data.incoming > 0 ? Math.round((data.ai_replied / data.incoming) * 100) : 0}%
+                  </span></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
