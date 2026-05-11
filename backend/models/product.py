@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, DateTime, Float, Text, ForeignKey
+from sqlalchemy import Column, String, Integer, DateTime, Float, Text, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 from datetime import datetime, timezone
 from models.database import Base
@@ -17,7 +17,7 @@ class Product(Base):
     category = Column(String(100))
     image_url = Column(String(500))
     tags = Column(String(500))  # comma-separated
-    is_active = Column(Integer, default=1)
+    is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
