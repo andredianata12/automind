@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 24 hours
     
+    # CORS
+    CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000,http://localhost:8800"
     # OpenAI
     OPENAI_API_KEY: Optional[str] = None
     OPENAI_MODEL: str = "gpt-4o-mini"

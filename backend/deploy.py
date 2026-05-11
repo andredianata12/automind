@@ -1,28 +1,20 @@
-"""
-Production deployment script.
-Serves both backend API and frontend static files.
-"""
+"""Production launcher for AutoMind."""
+
+import os
+from pathlib import Path
 
 import uvicorn
-import sys
-import os
 
-# Add frontend dist to path
-FRONTEND_DIST = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
+ROOT = Path(__file__).resolve().parent.parent
+FRONTEND_DIST = ROOT / "frontend" / "dist"
 
 if __name__ == "__main__":
-    # Set environment
     os.environ.setdefault("DATABASE_URL", "sqlite:///./automind.db")
-    
-    print("🚀 Starting AutoMind in production mode...")
-    print(f"   Frontend: {FRONTEND_DIST}")
+    os.environ.setdefault("CORS_ORIGINS", "http://localhost:8800")
+
+    print("Starting AutoMind production server")
     print(f"   Backend: http://0.0.0.0:8800")
-    print(f"   API Docs: http://0.0.0.0:8800/docs")
-    
-    uvicorn.run(
-        "main:app",
-        host="0.0.0.0",
-        port=8800,
-        workers=1,
-        log_level="info",
-    )
+    print(f"   API docs: http://0.0.0.0:8800/docs")
+    print(f"   Frontend dist: {FRONTEND_DIST} ({'found' if FRONTEND_DIST.exists() else 'missing'})")
+
+    uvicorn.run("main:app", host="0.0.0.0", port=8800, workers=1, log_level="info")

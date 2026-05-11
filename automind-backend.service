@@ -1,6 +1,7 @@
 [Unit]
-Description=AutoMind Backend API
-After=network.target
+Description=AutoMind Backend API and Frontend
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple
@@ -8,7 +9,8 @@ User=ubuntu
 WorkingDirectory=/home/ubuntu/automind/backend
 Environment=PATH=/home/ubuntu/automind/backend/venv/bin:/usr/local/bin:/usr/bin:/bin
 Environment=DATABASE_URL=sqlite:///./automind.db
-ExecStart=/home/ubuntu/automind/backend/venv/bin/python -m uvicorn main:app --host 0.0.0.0 --port 8800
+Environment=CORS_ORIGINS=http://54.156.126.227:8800,http://localhost:8800
+ExecStart=/home/ubuntu/automind/backend/venv/bin/python /home/ubuntu/automind/backend/deploy.py
 Restart=always
 RestartSec=5
 

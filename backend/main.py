@@ -1,4 +1,7 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import asyncio
@@ -64,11 +67,7 @@ app = FastAPI(
 )
 
 # CORS - configurable origins
-allowed_origins = [
-    "http://localhost:5173",
-    "http://localhost:3000",
-    "http://localhost:8800",
-]
+allowed_origins = [origin.strip() for origin in settings.CORS_ORIGINS.split(",") if origin.strip()]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
@@ -87,8 +86,8 @@ app.include_router(analytics.router, prefix="/api/analytics", tags=["Analytics"]
 app.include_router(webhooks.router, prefix="/api/webhooks", tags=["Webhooks"])
 
 
-@app.get("/")
-async def root():
+@app.get("/api-info")
+async def api_info():
     return {
         "name": "AutoMind API",
         "version": "1.0.0",
@@ -100,3 +99,19 @@ async def root():
 @app.get("/health")
 async def health():
     return {"status": "healthy"}
+
+
+# Serve production frontend build when frontend/dist exists.
+# API routes are registered above, so SPA fallback only handles non-API paths.
+FRONTEND_DIST = Path(__file__).resolve().parent.parent / "frontend" / "dist"
+if FRONTEND_DIST.exists():
+    app.mount("/assets", StaticFiles(directory=FRONTEND_DIST / "assets"), name="assets")
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_spa(full_path: str):
+        if full_path.startswith("api/"):
+            return {"detail": "Not Found"}
+        target = FRONTEND_DIST / full_path
+        if target.is_file():
+            return FileResponse(target)
+        return FileResponse(FRONTEND_DIST / "index.html")
