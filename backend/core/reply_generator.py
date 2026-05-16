@@ -76,20 +76,20 @@ class ReplyGenerator:
 
     def _fallback_reply(self, message: str, intent: Dict[str, Any], kb: Dict[str, Any], brand_voice: Dict[str, Any]) -> Dict[str, Any]:
         """Template-based fallback replies."""
-        greeting = brand_voice.get("greeting", "Halo kak! 😊")
+        greeting = brand_voice.get("greeting", "Hi there! 😊")
         intent_name = intent.get("intent", "GENERAL_QUESTION")
 
         templates = {
-            "PURCHASE_INQUIRY": f"{greeting} Terima kasih sudah tertarik! Kakak mau tanya produk yang mana? Kami siap bantu 😊",
-            "PRICE_CHECK": f"{greeting} Untuk info harga, bisa kasih tau produk yang kakak cari? Kami akan info harga terbaiknya!",
-            "COMPLAINT": f"{greeting} Mohon maaf atas ketidaknyamanannya. Kami akan segera bantu selesaikan. Bisa ceritakan masalahnya?",
-            "GREETING": f"{greeting} Ada yang bisa kami bantu hari ini?",
-            "GENERAL_QUESTION": f"{greeting} Tentang pertanyaan kakak, boleh info lebih detail? Kami akan bantu jawab sebaik mungkin!",
-            "COLLAB_OFFER": f"Terima kasih atas tawarannya! Kami akan teruskan ke tim terkait dan segera kabari 😊",
+            "PURCHASE_INQUIRY": f"{greeting} Thank you for your interest! Which product would you like to know about? We're happy to help 😊",
+            "PRICE_CHECK": f"{greeting} For pricing info, could you tell us which product you're looking for? We'll give you the best price!",
+            "COMPLAINT": f"{greeting} We're sorry for the inconvenience. We'll help resolve this right away. Could you describe the issue?",
+            "GREETING": f"{greeting} How can we help you today?",
+            "GENERAL_QUESTION": f"{greeting} Regarding your question, could you provide more details? We'll do our best to answer!",
+            "COLLAB_OFFER": f"Thank you for the offer! We'll forward it to the relevant team and get back to you soon 😊",
         }
 
         return {
-            "content": templates.get(intent_name, f"{greeting} Terima kasih atas pesannya. Kami akan segera merespon!"),
+            "content": templates.get(intent_name, f"{greeting} Thank you for your message. We'll respond shortly!"),
             "confidence": 0.6,
             "source": "template",
         }

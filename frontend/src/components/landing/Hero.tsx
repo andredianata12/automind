@@ -28,10 +28,10 @@ export default function Hero() {
               <span className="text-gray-500 text-sm ml-2">Live AutoMind Demo</span>
             </div>
             <div className="space-y-4">
-              <ChatBubble platform="WhatsApp" sender="Customer" text="Kak, sepatu size 42 ada?" isUser />
-              <ChatBubble platform="WhatsApp" sender="AutoMind AI" text="Ada kak! Size 42 ready stock. Warna: Hitam, Putih, Navy. Harga Rp 349.000. Mau langsung order? 😊" />
-              <ChatBubble platform="Shopee" sender="Customer" text="Berapa harga 3 pcs?" isUser />
-              <ChatBubble platform="Shopee" sender="AutoMind AI" text="Untuk 3 pcs harga Rp 135.000 (hemat Rp 15.000!). Free ongkir Jabodetabek! 🚚" />
+              <ChatBubble platform="WhatsApp" sender="Customer" text="Hey, do you have shoes in size 42?" isUser />
+              <ChatBubble platform="WhatsApp" sender="AutoMind AI" text="Yes! Size 42 is in stock. Colors: Black, White, Navy. Price Rp 349,000. Want to order now? 😊" />
+              <ChatBubble platform="Shopee" sender="Customer" text="What's the price for 3 pieces?" isUser />
+              <ChatBubble platform="Shopee" sender="AutoMind AI" text="For 3 pieces, the price is Rp 135,000 (save Rp 15,000!). Free shipping to Jabodetabek! 🚚" />
             </div>
           </div>
         </div>

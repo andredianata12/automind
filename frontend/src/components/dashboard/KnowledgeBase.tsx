@@ -1,13 +1,13 @@
 const products = [
-  { id: 1, name: "Sepatu Running Pro", price: "Rp 349.000", stock: 45, category: "Footwear", tags: "sepatu, running, sport" },
-  { id: 2, name: "Tas Ransel Premium", price: "Rp 249.000", stock: 120, category: "Bags", tags: "tas, ransel, laptop" },
-  { id: 3, name: "Kaos Polos Cotton", price: "Rp 89.000", stock: 300, category: "Apparel", tags: "kaos, cotton, polos" },
+  { id: 1, name: "Running Pro Shoes", price: "Rp 349,000", stock: 45, category: "Footwear", tags: "shoes, running, sport" },
+  { id: 2, name: "Premium Backpack", price: "Rp 249,000", stock: 120, category: "Bags", tags: "bag, backpack, laptop" },
+  { id: 3, name: "Plain Cotton T-Shirt", price: "Rp 89,000", stock: 300, category: "Apparel", tags: "t-shirt, cotton, plain" },
 ];
 
 const faqs = [
-  { q: "Berapa lama pengiriman?", a: "2-3 hari Jabodetabek, 3-7 hari luar kota" },
-  { q: "Bisa return?", a: "Bisa dalam 7 hari dengan syarat barang masih utuh" },
-  { q: "Ada garansi?", a: "Ya, garansi 30 hari untuk cacat produksi" },
+  { q: "How long is the delivery?", a: "2-3 days Jabodetabek, 3-7 days other cities" },
+  { q: "Can I return items?", a: "Yes, within 7 days as long as the item is still intact" },
+  { q: "Is there a warranty?", a: "Yes, 30-day warranty for manufacturing defects" },
 ];
 
 export default function KnowledgeBase() {

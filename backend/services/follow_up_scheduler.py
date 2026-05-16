@@ -17,9 +17,9 @@ class FollowUpScheduler:
     MAX_FOLLOW_UPS = 3
 
     FOLLOW_UP_TEMPLATES = [
-        "Halo {name}! Masih tertarik dengan produk kami? Ada yang bisa kami bantu? 😊",
-        "Halo {name}! Kami punya info menarik nih. Mau dengar? 🎉",
-        "Halo {name}! Spesial untuk kamu, kami kasih penawaran istimewa! Mau tau? 💰",
+        "Hi {name}! Still interested in our products? Is there anything we can help with? 😊",
+        "Hi {name}! We have some exciting news. Want to hear it? 🎉",
+        "Hi {name}! Special for you, we have an exclusive offer! Want to know more? 💰",
     ]
 
     def schedule_follow_up(self, lead: Lead, db: Session):
@@ -44,7 +44,7 @@ class FollowUpScheduler:
         """Generate personalized follow-up message."""
         template_idx = min(lead.follow_up_count, len(self.FOLLOW_UP_TEMPLATES) - 1)
         return self.FOLLOW_UP_TEMPLATES[template_idx].format(
-            name=lead.contact_name or "kak"
+            name=lead.contact_name or "there"
         )
 
     def mark_follow_up_sent(self, lead: Lead, db: Session):

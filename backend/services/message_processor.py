@@ -120,7 +120,7 @@ class MessageProcessor:
             user = db.query(User).filter(User.id == user_id).first()
             brand_voice = {
                 "business_name": user.business_name or user.username,
-                "greeting": "Halo kak! 😊",
+                "greeting": "Hi there! 😊",
                 "tone": "friendly",
             }
 

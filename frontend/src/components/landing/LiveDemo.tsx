@@ -8,19 +8,19 @@ const scenarios = [
 
 const demoChats: Record<string, { user: string; ai: string; intent: string; score: number }[]> = {
   ecommerce: [
-    { user: "Kak, sepatu size 42 ada?", ai: "Ada kak! Size 42 ready stock. Warna: Hitam, Putih, Navy. Harga Rp 349.000. Mau langsung order? 😊", intent: "PURCHASE_INQUIRY", score: 87 },
-    { user: "Bisa kurang?", ai: "Untuk hari ini ada promo 10% kak, jadi Rp 314.100 + free ongkir Jabodetabek! 🚚", intent: "PRICE_CHECK", score: 92 },
-    { user: "Oke checkout ya", ai: "Siap kak! 🎉 Terima kasih atas ordernya. Kami proses segera ya!", intent: "PURCHASE_INQUIRY", score: 100 },
+    { user: "Hey, do you have shoes in size 42?", ai: "Yes! Size 42 is in stock. Colors: Black, White, Navy. Price Rp 349,000. Want to order now? 😊", intent: "PURCHASE_INQUIRY", score: 87 },
+    { user: "Can you go lower?", ai: "Today there's a 10% promo, so Rp 314,100 + free shipping to Jabodetabek! 🚚", intent: "PRICE_CHECK", score: 92 },
+    { user: "Okay, checking out", ai: "Got it! 🎉 Thank you for your order. We'll process it right away!", intent: "PURCHASE_INQUIRY", score: 100 },
   ],
   service: [
-    { user: "Halo, jasa desain logo berapa?", ai: "Halo kak! 😊 Untuk desain logo mulai dari Rp 500.000. Sudah termasuk 3 revisi dan file vector. Mau lihat portofolio?", intent: "PRICE_CHECK", score: 75 },
-    { user: "Bisa lihat contoh?", ai: "Tentu kak! Ini beberapa portofolio terbaru kami: [link]. Style mana yang kakak suka?", intent: "GENERAL_QUESTION", score: 80 },
-    { user: "Suka yang minimalis. Bisa order?", ai: "Siap kak! Style minimalis favorit banget nih. Bisa langsung order, estimasi pengerjaan 3-5 hari kerja. Mau mulai sekarang? 🎨", intent: "PURCHASE_INQUIRY", score: 95 },
+    { user: "Hi, how much for logo design service?", ai: "Hi there! 😊 Logo design starts from Rp 500,000. Includes 3 revisions and vector files. Want to see our portfolio?", intent: "PRICE_CHECK", score: 75 },
+    { user: "Can I see some examples?", ai: "Of course! Here are some of our latest portfolios: [link]. Which style do you like?", intent: "GENERAL_QUESTION", score: 80 },
+    { user: "I like the minimalist one. Can I order?", ai: "Great choice! Minimalist style is very popular. You can order now, estimated completion 3-5 business days. Want to start? 🎨", intent: "PURCHASE_INQUIRY", score: 95 },
   ],
   fnb: [
-    { user: "Mau pesen nasi goreng 2 porsi", ai: "Siap kak! 2 porsi nasi goreng. Mau level pedas berapa? Ada tambahan telur atau ayam? 🍳", intent: "PURCHASE_INQUIRY", score: 90 },
-    { user: "Level 2, tambah telur", ai: "Oke kak! 2x Nasi Goreng Level 2 + Telur. Total Rp 56.000. Mau pakai GoFood/Grab atau ambil sendiri?", intent: "PURCHASE_INQUIRY", score: 95 },
-    { user: "GoFood aja", ai: "Siap kak! Pesanan sudah diproses di GoFood. Estimasi 25-30 menit. Terima kasih! 🛵", intent: "PURCHASE_INQUIRY", score: 100 },
+    { user: "I'd like to order 2 portions of fried rice", ai: "Got it! 2 portions of fried rice. What spice level? Any extra egg or chicken? 🍳", intent: "PURCHASE_INQUIRY", score: 90 },
+    { user: "Level 2, add egg", ai: "Okay! 2x Fried Rice Level 2 + Egg. Total Rp 56,000. GoFood/Grab or self pickup?", intent: "PURCHASE_INQUIRY", score: 95 },
+    { user: "GoFood please", ai: "Done! Your order has been processed on GoFood. Estimated 25-30 minutes. Thank you! 🛵", intent: "PURCHASE_INQUIRY", score: 100 },
   ],
 };
 

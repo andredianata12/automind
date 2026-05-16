@@ -10,15 +10,15 @@ export default function AIBrainPanel() {
           <div className="space-y-4">
             <div>
               <label className="block text-sm text-gray-400 mb-1">Business Name</label>
-              <input className="input w-full" defaultValue="Toko Sepatu Andre" />
+              <input className="input w-full" defaultValue="Andre's Shoe Store" />
             </div>
             <div>
               <label className="block text-sm text-gray-400 mb-1">Greeting Message</label>
-              <input className="input w-full" defaultValue="Halo kak! 😊 Ada yang bisa kami bantu?" />
+              <input className="input w-full" defaultValue="Hi there! 😊 How can we help you?" />
             </div>
             <div>
               <label className="block text-sm text-gray-400 mb-1">Signature</label>
-              <input className="input w-full" defaultValue="Ada yang bisa dibantu lagi? 😊" />
+              <input className="input w-full" defaultValue="Is there anything else I can help with? 😊" />
             </div>
             <div>
               <label className="block text-sm text-gray-400 mb-1">Tone</label>

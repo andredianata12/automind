@@ -14,7 +14,7 @@ export default function Settings() {
             </div>
             <div>
               <label className="block text-sm text-gray-400 mb-1">Business Name</label>
-              <input className="input w-full" defaultValue="Toko Sepatu Andre" />
+              <input className="input w-full" defaultValue="Andre's Shoe Store" />
             </div>
             <div>
               <label className="block text-sm text-gray-400 mb-1">Email</label>
